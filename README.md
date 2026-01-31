@@ -18,8 +18,6 @@ then forwards packets through a **tun2socks** pipeline into a **Slipstream trans
 
 ## Screenshots
 
-> Place screenshots in: `docs/screenshots/`
-
 <p float="left">
   <img src="docs/screenshots/Screenshot_20260131_023837_Slipstream%20Client.png" width="220" />
   <img src="docs/screenshots/Screenshot_20260131_023903_Slipstream%20Client.png" width="220" />
