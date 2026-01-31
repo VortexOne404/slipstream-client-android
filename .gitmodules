@@ -1,0 +1,9 @@
+[submodule "app/src/main/jni/hev-socks5-tunnel"]
+	path = app/src/main/jni/hev-socks5-tunnel
+	url = https://github.com/heiher/hev-socks5-tunnel.git
+[submodule "app/src/main/rust/slipstream-rust"]
+	path = app/src/main/rust/slipstream-rust
+	url = https://github.com/Mygod/slipstream-rust.git
+[submodule "app/src/main/rust/third_party/openssl"]
+	path = app/src/main/rust/third_party/openssl
+	url = https://github.com/openssl/openssl.git
