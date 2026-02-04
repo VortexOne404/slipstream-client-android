@@ -9,10 +9,10 @@ then forwards packets through a **tun2socks** pipeline into a **Slipstream trans
 
 ## Status
 
-![Latest Release](https://img.shields.io/github/v/release/VortexOne88/slipstream-client-android)
-![Downloads](https://img.shields.io/github/downloads/VortexOne88/slipstream-client-android/total)
-![Stars](https://img.shields.io/github/stars/VortexOne88/slipstream-client-android)
-![Forks](https://img.shields.io/github/forks/VortexOne88/slipstream-client-android)
+![Latest Release](https://img.shields.io/github/v/release/VortexOne404/slipstream-client-android)
+![Downloads](https://img.shields.io/github/downloads/VortexOne404/slipstream-client-android/total)
+![Stars](https://img.shields.io/github/stars/VortexOne404/slipstream-client-android)
+![Forks](https://img.shields.io/github/forks/VortexOne404/slipstream-client-android)
 
 ---
 
@@ -108,7 +108,7 @@ Internet
 Clone with submodules:
 
 ```bash
-git clone --recurse-submodules https://github.com/VortexOne88/slipstream-client-android.git
+git clone --recurse-submodules https://github.com/VortexOne404/slipstream-client-android.git
 cd slipstream-client-android
 ```
 
