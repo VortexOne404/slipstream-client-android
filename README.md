@@ -42,6 +42,20 @@ that can be extended and swapped easily.
 
 ---
 
+## Server Setup
+
+To set up a Slipstream server, you can use the following project:
+
+👉 https://github.com/AliRezaBeigy/slipstream-rust-deploy
+
+**One-command installation:**
+```bash
+bash <(curl -Ls https://raw.githubusercontent.com/AliRezaBeigy/slipstream-rust-deploy/master/slipstream-rust-deploy.sh)
+```
+
+---
+
+
 ## Architecture
 
 ### Data Path
