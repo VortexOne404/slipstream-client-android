@@ -10,7 +10,6 @@ object ConfigCodec {
         val obj = JSONObject().apply {
             put("id", cfg.id)
             put("name", cfg.name)
-            put("resolver", cfg.resolver)
             put("domain", cfg.domain)
             put("socksAuthEnabled", cfg.socksAuthEnabled)
             put("username", cfg.username)
@@ -33,7 +32,6 @@ object ConfigCodec {
             SlipstreamConfig(
                 id = obj.optString("id", "cfg_${System.currentTimeMillis()}"),
                 name = obj.optString("name", "Imported"),
-                resolver = obj.optString("resolver", "8.8.8.8:53"),
                 domain = obj.getString("domain"),
                 socksAuthEnabled = obj.optBoolean("socksAuthEnabled", true),
                 username = obj.optString("username", ""),

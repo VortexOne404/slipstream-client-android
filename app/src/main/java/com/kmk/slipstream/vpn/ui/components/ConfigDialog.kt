@@ -21,7 +21,6 @@ private fun validateResolver(resolver: String): String? {
 }
 
 private fun validateConfig(cfg: SlipstreamConfig): String? {
-    validateResolver(cfg.resolver)?.let { return it }
     if (cfg.name.trim().isEmpty()) return "Name is empty."
     if (cfg.domain.trim().isEmpty()) return "Domain is empty."
     if (cfg.socksAuthEnabled) {
@@ -39,7 +38,6 @@ fun AddOrEditConfigDialog(
     onSave: (SlipstreamConfig) -> Unit
 ) {
     var name by remember { mutableStateOf(initial?.name ?: "Manual") }
-    var resolver by remember { mutableStateOf(initial?.resolver ?: "8.8.8.8:53") }
     var domain by remember { mutableStateOf(initial?.domain ?: "") }
     var authEnabled by remember { mutableStateOf(initial?.socksAuthEnabled ?: true) }
     var user by remember { mutableStateOf(initial?.username ?: "") }
@@ -59,8 +57,6 @@ fun AddOrEditConfigDialog(
                 }
 
                 OutlinedTextField(name, { name = it }, label = { Text("Name") }, singleLine = true, modifier = Modifier.fillMaxWidth())
-                Spacer(Modifier.height(8.dp))
-                OutlinedTextField(resolver, { resolver = it }, label = { Text("DNS Resolver (host:port)") }, singleLine = true, modifier = Modifier.fillMaxWidth())
                 Spacer(Modifier.height(8.dp))
                 OutlinedTextField(domain, { domain = it }, label = { Text("Domain") }, singleLine = true, modifier = Modifier.fillMaxWidth())
 
@@ -93,7 +89,6 @@ fun AddOrEditConfigDialog(
                 val cfg = SlipstreamConfig(
                     id = initial?.id ?: "cfg_${System.currentTimeMillis()}",
                     name = name.trim(),
-                    resolver = resolver.trim(),
                     domain = domain.trim(),
                     socksAuthEnabled = authEnabled,
                     username = user.trim(),

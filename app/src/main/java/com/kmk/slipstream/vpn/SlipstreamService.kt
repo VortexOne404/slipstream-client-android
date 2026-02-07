@@ -33,7 +33,7 @@ class SlipstreamService : Service() {
 
     override fun onBind(intent: Intent?): IBinder = binder
 
-    fun startSlipstream(resolver: String, domain: String, tcpListenPort: Int) {
+    fun startSlipstream(resolvers: List<String>, domain: String, tcpListenPort: Int) {
         if (proc != null) {
             log("Slipstream already running.")
             return
@@ -42,12 +42,10 @@ class SlipstreamService : Service() {
         try {
             val exe = getSlipstreamExe()
 
-            val args = listOf(
-                exe.absolutePath,
-                "--resolver", resolver,
-                "--domain", domain,
-                "--tcp-listen-port", tcpListenPort.toString()
-            )
+            val args = mutableListOf<String>()
+            args.add(exe.absolutePath)
+            resolvers.forEach { args.addAll(listOf("--resolver", it)) }
+            args.addAll(listOf("--domain", domain, "--tcp-listen-port", tcpListenPort.toString()))
 
             log("Starting slipstream: ${args.joinToString(" ")}")
 

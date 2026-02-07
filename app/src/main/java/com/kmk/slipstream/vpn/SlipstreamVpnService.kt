@@ -24,6 +24,7 @@ enum class VpnUiState { DISCONNECTED, CONNECTING, CONNECTED, DISCONNECTING, ERRO
 class SlipstreamVpnService : VpnService() {
 
     companion object {
+
         const val ACTION_CONNECT = "com.kmk.slipstream.vpn.CONNECT"
         const val ACTION_DISCONNECT = "com.kmk.slipstream.vpn.DISCONNECT"
 
@@ -32,12 +33,12 @@ class SlipstreamVpnService : VpnService() {
         const val EXTRA_STATUS = "status"
         const val EXTRA_STATUS_REASON = "reason"
 
-        const val EXTRA_RESOLVER = "resolver"
         const val EXTRA_DOMAIN = "domain"
         const val EXTRA_SOCKS5_AUTH_ENABLED = "socks5_auth_enabled"
         const val EXTRA_SOCKS5_AUTH_USERNAME = "socks5_auth_username"
         const val EXTRA_SOCKS5_AUTH_PASSWORD = "socks5_auth_password"
 
+        val EXTRA_RESOLVER_LIST: String? = "resolver"
         private const val TAG = "slipstream_vpn"
         private const val NOTIF_ID = 1
         private const val CHANNEL_ID = "slipstream_vpn"
@@ -112,7 +113,8 @@ class SlipstreamVpnService : VpnService() {
         // reset stop guard for a new run
         synchronized(stopLock) { stopping = false }
 
-        val resolver = intent?.getStringExtra(EXTRA_RESOLVER) ?: "8.8.8.8:53"
+        val dnsList = intent?.getStringArrayExtra(EXTRA_RESOLVER_LIST) ?: emptyArray()
+        val resolver = dnsList
         val domain = intent?.getStringExtra(EXTRA_DOMAIN) ?: "google.com"
         val port = 5201
 
@@ -132,7 +134,7 @@ class SlipstreamVpnService : VpnService() {
                     throw IllegalStateException("SlipstreamService bind timeout")
                 }
 
-                slipstream?.startSlipstream(resolver, domain, port)
+                slipstream?.startSlipstream(resolver as List<String>, domain, port)
 
                 startTProxy(
                     tun = tunPfd!!,

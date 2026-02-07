@@ -1,9 +1,53 @@
+
 # Slipstream Client for Android
 
 An **Android VPN client** inspired by *Slipstream-style* architectures.
 It captures **all system traffic** using Android `VpnService` (TUN),
 then forwards packets through a **tun2socks** pipeline into a **Slipstream transport**
 (e.g. **SOCKS5**).
+
+---
+
+## Documentation
+
+- English: README.md
+- فارسی: README_FA.md
+
+---
+
+## Update
+
+To improve performance and increase connection speed, the new version replaces the previous dependency:
+
+https://github.com/Mygod/slipstream-rust
+
+with the optimized implementation:
+
+https://github.com/Fox-Fig/slipstream-rust-plus
+
+**Improvements:**
+- Higher throughput
+- Lower latency
+- Better connection stability
+- More efficient resource usage
+
+---
+
+## Protocol Flow
+
+```
+Client Apps
+    ↓
+tun2socks
+    ↓
+Slipstream Client
+    ↓
+DNS Resolution
+    ↓
+Slipstream Server
+    ↓
+Internet Access
+```
 
 ---
 
@@ -44,24 +88,24 @@ that can be extended and swapped easily.
 
 ## Server Setup
 
-To set up a Slipstream server, you can use the following project:
+To set up a Slipstream server, use:
 
-👉 https://github.com/AliRezaBeigy/slipstream-rust-deploy
+https://github.com/AliRezaBeigy/slipstream-rust-deploy
 
 **One-command installation:**
+
 ```bash
 bash <(curl -Ls https://raw.githubusercontent.com/AliRezaBeigy/slipstream-rust-deploy/master/slipstream-rust-deploy.sh)
 ```
 
 ---
 
-
 ## Architecture
 
 ### Data Path
 
 ```text
-Android Apps (system traffic)
+Client Apps
    |
    v
 VpnService TUN (fd)
@@ -71,49 +115,63 @@ tun2socks
 (IP packets -> streams)
    |
    v
-Slipstream Transport Layer
-(SOCKS5 / custom tunnel)
+Slipstream Client Core
+   |
+   v
+DNS Processing
+   |
+   v
+Slipstream Server
    |
    v
 Internet
 ```
 
+---
+
 ### Components
 
-- **Android `VpnService`**
-  - Creates the device-wide TUN interface
-  - Installs routes + DNS
-  - Runs as a foreground service for stability
-  - Protects the tunnel socket to avoid routing loops
+#### Android `VpnService`
+- Creates the device-wide TUN interface
+- Installs routes + DNS
+- Runs as a foreground service for stability
+- Protects the tunnel socket to avoid routing loops
 
-- **tun2socks core**
-  - Reads/writes raw IP packets from the TUN FD
-  - Maps TCP/UDP flows into user-space connections
-  - Forwards flows into the transport backend
+#### tun2socks core
+- Reads/writes raw IP packets from the TUN FD
+- Maps TCP/UDP flows into user-space connections
+- Forwards flows into the transport backend
 
-- **Slipstream transport backend**
-  - Provides proxied connectivity (default: SOCKS5)
-  - Designed to be pluggable (swap transports without rewriting the app)
+#### Slipstream Client Core
+- Handles transport logic
+- Manages DNS routing
+- Connects to Slipstream server
+
+#### Slipstream transport backend
+- Default: SOCKS5
+- Designed to be pluggable (swap transports without rewriting the app)
 
 ---
 
 ## Features
 
-- ✅ **Full-tunnel** mode (proxy all system traffic)
-- ✅ **SOCKS5 backend**
-- ✅ Modular design for experimenting with new transports
-- ✅ Import/Export configs using URI format: `slipstream://{base64}`
+- Full-tunnel mode (proxy all system traffic)
+- SOCKS5 backend
+- Modular design for experimenting with new transports
+- Import/Export configs using URI format: `slipstream://{base64}`
+- Designed for research and custom transport development
 
-> Note: UDP/IPv6 behavior depends on the tun2socks implementation and the chosen transport.
-> DNS handling is recommended to avoid leaks.
+> Note: UDP/IPv6 behavior depends on the tun2socks implementation and the chosen transport.  
+> Proper DNS configuration is recommended to avoid leaks.
 
 ---
 
 ## Requirements
 
 - Android 8.0+ (recommended)
-- Android Studio + NDK (for native tun2socks components)
-- A reachable transport endpoint (e.g. a SOCKS5 server)
+- Android Studio
+- Android NDK (for native tun2socks components)
+- A reachable transport endpoint (e.g. a Slipstream with SOCKS5 server)
 
 ---
 
@@ -131,6 +189,13 @@ Build:
 ```bash
 ./gradlew assembleRelease
 ```
+
+---
+
+## Support
+
+Telegram: https://t.me/VortexOne
+Telegram Channel: https://t.me/silk_road_community
 
 ---
 

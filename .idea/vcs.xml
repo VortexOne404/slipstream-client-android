@@ -2,5 +2,29 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/jni/hev-socks5-tunnel" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/jni/hev-socks5-tunnel/src/core" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/jni/hev-socks5-tunnel/third-part/hev-task-system" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/jni/hev-socks5-tunnel/third-part/lwip" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/jni/hev-socks5-tunnel/third-part/yaml" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/rust/slipstream-rust" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/rust/slipstream-rust/vendor/picoquic" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/rust/third_party/openssl" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/rust/third_party/openssl/cloudflare-quiche" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/rust/third_party/openssl/cloudflare-quiche/quiche/deps/boringssl" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/rust/third_party/openssl/fuzz/corpora" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/rust/third_party/openssl/gost-engine" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/rust/third_party/openssl/gost-engine/libprov" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/rust/third_party/openssl/krb5" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/rust/third_party/openssl/oqs-provider" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/rust/third_party/openssl/pkcs11-provider" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/rust/third_party/openssl/pkcs11-provider/python-ecdsa" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/rust/third_party/openssl/pkcs11-provider/tlsfuzzer" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/rust/third_party/openssl/pkcs11-provider/tlslite-ng" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/rust/third_party/openssl/pyca-cryptography" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/rust/third_party/openssl/python-ecdsa" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/rust/third_party/openssl/tlsfuzzer" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/rust/third_party/openssl/tlslite-ng" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/src/main/rust/third_party/openssl/wycheproof" vcs="Git" />
   </component>
 </project>

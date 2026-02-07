@@ -40,6 +40,7 @@ fun InfoScreen(
                     Spacer(Modifier.height(6.dp))
                     Text("• Configs: slipstream://{base64}", style = MaterialTheme.typography.bodySmall)
                     Text("• Ping is manual (tap Ping button)", style = MaterialTheme.typography.bodySmall)
+                    Text("• Add dns page And multiple resolver", style = MaterialTheme.typography.bodySmall)
                 }
             }
 

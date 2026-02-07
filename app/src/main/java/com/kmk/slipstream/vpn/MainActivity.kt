@@ -23,12 +23,15 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.kmk.slipstream.vpn.data.SlipstreamConfig
 import com.kmk.slipstream.vpn.ui.nav.DrawerPage
+import com.kmk.slipstream.vpn.ui.screens.DnsListScreen
 import com.kmk.slipstream.vpn.ui.screens.HomeScreen
 import com.kmk.slipstream.vpn.ui.screens.InfoScreen
 import com.kmk.slipstream.vpn.ui.screens.LogsScreen
 import com.kmk.slipstream.vpn.ui.screens.SpeedScreen
 import com.kmk.slipstream.vpn.ui.theme.SlipstreamVpnTheme
 import kotlinx.coroutines.launch
+
+
 
 
 class MainActivity : ComponentActivity() {
@@ -132,18 +135,23 @@ class MainActivity : ComponentActivity() {
 
                 fun connectWithConfig(cfg: SlipstreamConfig, setState: (VpnUiState) -> Unit) {
                     val prep = android.net.VpnService.prepare(this@MainActivity)
+
                     val start = {
+                        val prefs = getSharedPreferences("vpn", Context.MODE_PRIVATE)
+                        val dnsList = prefs.getStringSet("dns_list", emptySet())?.toList() ?: emptyList()
+
                         val i = Intent(this@MainActivity, SlipstreamVpnService::class.java).apply {
                             action = SlipstreamVpnService.ACTION_CONNECT
-                            putExtra(SlipstreamVpnService.EXTRA_RESOLVER, cfg.resolver.trim())
                             putExtra(SlipstreamVpnService.EXTRA_DOMAIN, cfg.domain.trim())
                             putExtra(SlipstreamVpnService.EXTRA_SOCKS5_AUTH_ENABLED, cfg.socksAuthEnabled)
                             putExtra(SlipstreamVpnService.EXTRA_SOCKS5_AUTH_USERNAME, cfg.username.trim())
                             putExtra(SlipstreamVpnService.EXTRA_SOCKS5_AUTH_PASSWORD, cfg.password)
+                            putExtra(SlipstreamVpnService.EXTRA_RESOLVER_LIST, dnsList.toTypedArray()) // ✅ آرایه DNS
                         }
+
                         setState(VpnUiState.CONNECTING)
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) startForegroundService(i) else startService(i)
-                        addLog("VPN start requested.")
+                        addLog("VPN start requested with DNS: $dnsList")
                     }
 
                     if (prep != null) {
@@ -152,6 +160,7 @@ class MainActivity : ComponentActivity() {
                         vpnPrepare.launch(prep)
                     } else start()
                 }
+
 
                 fun disconnect(setState: (VpnUiState) -> Unit) {
                     setState(VpnUiState.DISCONNECTING)
@@ -192,6 +201,12 @@ class MainActivity : ComponentActivity() {
                                     selected = page == DrawerPage.LOGS,
                                     onClick = { page = DrawerPage.LOGS; scope.launch { drawerState.close() } },
                                     icon = { Icon(Icons.Default.List, null) }
+                                )
+                                NavigationDrawerItem(
+                                    label = { Text("Dns") },
+                                    selected = page == DrawerPage.DNS,
+                                    onClick = { page = DrawerPage.DNS; scope.launch { drawerState.close() } },
+                                    icon = { Icon(Icons.Default.Dns, null) }
                                 )
                                 NavigationDrawerItem(
                                     label = { Text("Info") },
@@ -236,6 +251,11 @@ class MainActivity : ComponentActivity() {
                                 vpnState = vpnState.value,
                                 statusReason = statusReason.value,
                                 logs = logs
+                            )
+
+                            DrawerPage.DNS -> DnsListScreen(
+                                context = this@MainActivity,
+                                onMenu = { scope.launch { drawerState.open() } },
                             )
 
                             DrawerPage.INFO -> InfoScreen(

@@ -15,7 +15,6 @@ object ConfigStorage {
                 SlipstreamConfig(
                     id = o.optString("id", "cfg_${idx}_${System.currentTimeMillis()}"),
                     name = o.optString("name", "Config ${idx + 1}"),
-                    resolver = o.optString("resolver", "8.8.8.8:53"),
                     domain = o.optString("domain", ""),
                     socksAuthEnabled = o.optBoolean("socksAuthEnabled", true),
                     username = o.optString("username", ""),
@@ -31,7 +30,6 @@ object ConfigStorage {
             arr.put(JSONObject().apply {
                 put("id", cfg.id)
                 put("name", cfg.name)
-                put("resolver", cfg.resolver)
                 put("domain", cfg.domain)
                 put("socksAuthEnabled", cfg.socksAuthEnabled)
                 put("username", cfg.username)

@@ -50,8 +50,8 @@ android {
         applicationId = "com.kmk.slipstream.vpn"
         minSdk = minSdkVersionValue
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
     }
@@ -247,9 +247,6 @@ rustTargets.forEach { t ->
             val outDir = file("$projectDir/src/main/jniLibs/${t.abi}")
             outDir.mkdirs()
             val outSo = outDir.resolve(outSoName).absolutePath
-
-            val releaseFlag = if (cargoProfile == "release") "--release" else ""
-
             project.exec {
                 workingDir = file(rustDir)
                 executable = "cargo"
