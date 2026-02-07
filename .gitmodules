@@ -3,7 +3,7 @@
 	url = https://github.com/heiher/hev-socks5-tunnel.git
 [submodule "app/src/main/rust/slipstream-rust"]
 	path = app/src/main/rust/slipstream-rust
-	url = https://github.com/Mygod/slipstream-rust.git
+	url = https://github.com/Fox-Fig/slipstream-rust-plus.git
 [submodule "app/src/main/rust/third_party/openssl"]
 	path = app/src/main/rust/third_party/openssl
 	url = https://github.com/openssl/openssl.git
