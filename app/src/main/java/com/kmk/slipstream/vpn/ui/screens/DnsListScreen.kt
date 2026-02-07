@@ -29,7 +29,18 @@ fun DnsListScreen(
     val sharedPrefs = prefs(context)
     val savedSet = sharedPrefs.getStringSet("dns_list", emptySet()) ?: emptySet()
 
-    var dnsList by remember { mutableStateOf(savedSet.toList()) } // immutable list
+// Add default DNS if saved list is empty
+    val defaultDns = listOf("8.8.8.8", "1.1.1.1:53")
+    val initialDnsList = if (savedSet.isEmpty()) {
+        // Save defaults to prefs
+        sharedPrefs.edit { putStringSet("dns_list", defaultDns.toSet()) }
+        defaultDns
+    } else {
+        savedSet.toList()
+    }
+
+    var dnsList by remember { mutableStateOf(initialDnsList) }
+
     var newDns by remember { mutableStateOf("") }
 
     val scope = rememberCoroutineScope()

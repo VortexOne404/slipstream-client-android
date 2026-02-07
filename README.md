@@ -10,8 +10,8 @@ then forwards packets through a **tun2socks** pipeline into a **Slipstream trans
 
 ## Documentation
 
-- English: README.md
-- فارسی: README_FA.md
+- [English](README.md)
+- [فارسی](README_FA.md)
 
 ---
 

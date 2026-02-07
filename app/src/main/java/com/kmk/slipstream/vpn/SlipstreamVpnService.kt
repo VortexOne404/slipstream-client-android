@@ -114,7 +114,8 @@ class SlipstreamVpnService : VpnService() {
         synchronized(stopLock) { stopping = false }
 
         val dnsList = intent?.getStringArrayExtra(EXTRA_RESOLVER_LIST) ?: emptyArray()
-        val resolver = dnsList
+        val resolver = dnsList.toList() // convert to List<String>
+
         val domain = intent?.getStringExtra(EXTRA_DOMAIN) ?: "google.com"
         val port = 5201
 
@@ -134,7 +135,7 @@ class SlipstreamVpnService : VpnService() {
                     throw IllegalStateException("SlipstreamService bind timeout")
                 }
 
-                slipstream?.startSlipstream(resolver as List<String>, domain, port)
+                slipstream?.startSlipstream(resolver, domain, port)
 
                 startTProxy(
                     tun = tunPfd!!,
